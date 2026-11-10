@@ -73,6 +73,11 @@
 		var $sidebar = $('#sidebar'),
 			$sidebar_inner = $sidebar.children('.inner');
 
+			$window.on('load',function() {
+				let collapsed = sessionStorage.getItem('collapsed') ?? "open";
+				$sidebar.toggleClass('inactive', collapsed === "closed");
+			});
+
 		// Inactive by default on <= large.
 			breakpoints.on('<=large', function() {
 				$sidebar.addClass('inactive');
@@ -98,6 +103,8 @@
 						event.stopPropagation();
 
 					// Toggle.
+						let collapsed = sessionStorage.getItem('collapsed') ?? "open";
+						sessionStorage.setItem('collapsed', (collapsed==="open" ? "closed" : "open"));
 						$sidebar.toggleClass('inactive');
 
 				});
@@ -159,6 +166,7 @@
 							return;
 
 					// Deactivate.
+						sessionStorage.setItem('collapsed', "closed");
 						$sidebar.addClass('inactive');
 
 				});

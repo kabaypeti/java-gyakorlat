@@ -56,6 +56,11 @@ public class DbController {
         model.addAttribute("data", mappedData);
     }
 
+    @GetMapping("/")
+    public String getDbSelect() {
+        return "db_select";
+    }
+
     @GetMapping("/kategoria")
     public String getKategoria(Model model, @RequestParam(value="page",defaultValue=PAGE) int page, @RequestParam(value="perpage",defaultValue=PERPAGE) int perpage) {
         setupDbPage(model, kategoriaRepository,
@@ -65,6 +70,7 @@ public class DbController {
         ), List.of(
             "Kategória neve", "Ár"
         ), page, perpage);
+        model.addAttribute("tableName", "Pizza kategóriák");
         return "db_view";
     }
 
@@ -78,6 +84,7 @@ public class DbController {
         ), List.of(
             "Pizza neve", "Kategória neve", "Vegetáriánus?"
         ), page, perpage);
+        model.addAttribute("tableName", "Pizzák");
         return "db_view";
     }
 
@@ -92,6 +99,7 @@ public class DbController {
         ), List.of(
             "Pizza neve", "Darabszám", "Felvétel dátuma", "Kiszállítás dátuma"
         ), page, perpage);
+        model.addAttribute("tableName", "Rendelések");
         return "db_view";
     }
 

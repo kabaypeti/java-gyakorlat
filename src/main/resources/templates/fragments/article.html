@@ -1,0 +1,8 @@
+<article>
+    <div class="image"><img th:src="@{${image}}" alt="" /></div>
+    <h3 th:text="${name}"></h3>
+    <p th:text="${text}">Pizza kategóriák. Különböző pizzafajták és ezek árazásai.</p>
+    <ul class="actions">
+        <li><a th:href="@{${destination}}" class="button" th:text="${btntext != null ? btntext : 'Megtekintés'}"></a></li>
+    </ul>
+</article>

@@ -1,0 +1,39 @@
+<th:block th:insert="~{/fragments/main :: page (viewid='db_select', title='Adatok kiválasztása')}"/>
+<th:block th:if="false">
+  <th:block th:fragment="content">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back,arrow_forward"/>
+    <div id="main">
+      <div class="inner">
+
+        <section>
+          <header class="major">
+            <h2>Adatlista kiválasztása</h2>
+          </header>
+          <div class="posts">
+            <th:block th:replace="~{fragments/article (
+              image='/images/pic01.jpg',
+              name='Kategóriák',
+              text='Pizza kategóriák. Különböző fajták és ezek árazásai.',
+              destination='/db/kategoria'
+            )}"></th:block>
+
+            <th:block th:replace="~{fragments/article (
+              image='/images/pic02.jpg',
+              name='Pizzák',
+              text='Az összes pizza a kínálaton. Típus, kategória, vegán/nem vegán.',
+              destination='/db/pizza'
+            )}"></th:block>
+
+            <th:block th:replace="~{fragments/article (
+              image='/images/pic03.jpg',
+              name='Rendelések',
+              text='Az eddigi összes rendelés listája. Pizza, darabszám, felvétel/kiszállítás ideje.',
+              destination='/db/rendeles'
+            )}"></th:block>
+
+          </div>
+        </section>
+      </div>
+    </div>
+  </th:block>
+</th:block>
