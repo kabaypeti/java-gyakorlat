@@ -3,15 +3,21 @@
   <th:block th:fragment="content">
     <div id="main">
       <div class="inner">
-        <hr>
-        <h2>Login</h2>
-        <div th:if="${param.registered}" style="color: green;">Successful registration! You can log in.</div>
-        <div th:if="${param.error}" style="color: red;">Incorrect username or password!</div>
-        <form th:action="@{/login}" method="post">
-          <label>Username:</label><input type="text" name="username"><br>
-          <label>Password:</label><input type="password" name="password"><br>
-          <button type="submit">Login</button>
-        </form>
+
+        <section>
+          <div class="content">
+            <hr>
+            <h2>Login</h2>
+            <div th:if="${param.registered}" style="color: green;">Successful registration! You can log in.</div>
+            <div th:if="${param.error}" style="color: red;">Incorrect username or password!</div>
+            <form th:action="@{/login}" method="post">
+              <label>Username:</label><input type="text" name="username"><br>
+              <label>Password:</label><input type="password" name="password"><br>
+              <button type="submit">Login</button>
+            </form>
+          </div>
+        </section>
+
       </div>
     </div>
   </th:block>

@@ -1,0 +1,31 @@
+<th:block th:insert="~{/fragments/main :: page (page='db_view', title='Java Java Java')}"/>
+<th:block th:if="false">
+  <th:block th:fragment="content">
+    <div id="main">
+      <div class="inner">
+
+        <section>
+          <div class="content">
+            <th:block th:if="${data}">
+              <table>
+                <thead>
+                  <th:block th:each="c : ${columnNames}">
+                    <th th:text="${c}"></th>
+                  </th:block>
+                </thead>
+                <th:block th:each="d : ${data}">
+                  <tr>
+                    <th:block th:each="v : ${d}">
+                      <td th:text="${v}"></td>
+                    </th:block>
+                  </tr>
+                </th:block>
+              </table>
+            </th:block>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </th:block>
+</th:block>

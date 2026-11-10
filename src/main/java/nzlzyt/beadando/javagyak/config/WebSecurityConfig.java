@@ -24,11 +24,6 @@ public class WebSecurityConfig {
         this.userDetailsService = userDetailsService;
     }
 
-    private static final String[] PUBLIC_MATCHERS = {
-            "/assets/**",
-            "/images/**"
-    };
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -59,7 +54,7 @@ public class WebSecurityConfig {
         http
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/register", "/login", "/assets/**", "/images/**", "/static/**").permitAll()
+                        .requestMatchers("/", "/register", "/login", "/db/**", "/assets/**", "/images/**", "/static/**").permitAll()
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/admin").hasRole("ADMIN")

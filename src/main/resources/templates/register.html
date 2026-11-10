@@ -3,15 +3,20 @@
     <th:block th:fragment="content">
         <div id="main">
             <div class="inner">
-                <hr>
-                <h2>Registration</h2>
-                <p th:if="${error}" th:text="${error}" style="color: red"></p>
-                <form th:action="@{/register}" method="post">
-                    <label>Username:</label><input type="text" name="username" required><br>
-                    <label>Password:</label><input type="password" name="password" required><br>
-                    <label>Password Confirmation:</label><input type="password" name="password_confirmation" required><br>
-                    <button type="submit">Register</button>
-                </form>
+
+                <section>
+                    <div class="content">
+                        <hr>
+                        <h2>Registration</h2>
+                        <p th:if="${error}" th:text="${error}" style="color: red"></p>
+                        <form th:action="@{/register}" method="post">
+                            <label>Username:</label><input type="text" name="username" required><br>
+                            <label>Password:</label><input type="password" name="password" required><br>
+                            <label>Password Confirmation:</label><input type="password" name="password_confirmation" required><br>
+                            <button type="submit">Register</button>
+                        </form>
+                    </div>
+                </section>
             </div>
         </div>
     </th:block>
