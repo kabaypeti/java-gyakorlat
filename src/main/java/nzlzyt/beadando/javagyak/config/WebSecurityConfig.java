@@ -1,13 +1,21 @@
 package nzlzyt.beadando.javagyak.config;
 import nzlzyt.beadando.javagyak.service.CustomUserDetailsService;
+import org.springframework.boot.security.autoconfigure.web.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.CacheControl;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.resource.CssLinkResourceTransformer;
+import org.springframework.web.servlet.resource.VersionResourceResolver;
+
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class WebSecurityConfig {
@@ -15,6 +23,12 @@ public class WebSecurityConfig {
     public WebSecurityConfig(CustomUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
+
+    private static final String[] PUBLIC_MATCHERS = {
+            "/assets/**",
+            "/images/**"
+    };
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -42,10 +56,11 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
-                http
+        http
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/register", "/login", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/", "/register", "/login", "/assets/**", "/images/**", "/static/**").permitAll()
+                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest()
@@ -67,7 +82,7 @@ public class WebSecurityConfig {
                         )
                         .defaultAuthenticationEntryPointFor(
                                 (request, response, authException) ->
-                                        response.sendRedirect("/"),request -> request.getRequestURI().equals("/admin")
+                                        response.sendRedirect("/"), request -> request.getRequestURI().equals("/admin")
                         )
                         .accessDeniedHandler(
                                 (request, response, accessDeniedException) -> response.sendRedirect("/")

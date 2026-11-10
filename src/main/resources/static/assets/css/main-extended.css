@@ -1,0 +1,50 @@
+@import url(./main.css);
+
+.form-container .row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.form-container input[type="date"] {
+    width: 100%;
+}
+
+input[type="submit"].primary-button,
+input[type="button"].primary-button {
+    width: 100%;
+    margin: 0;
+    margin-top: 40px;
+}
+
+a.link-button:link,
+a.link-button:active,
+a.link-button:visited,
+a.link-button:hover {
+    text-decoration: none;
+    border: none;
+}
+
+.account-info li {
+    list-style-type: none;
+    overflow-wrap: anywhere;
+    overflow: hidden;
+}
+
+.account-info-left {
+    border-right: 1px dotted rgba(0, 0, 0, 0.3);
+}
+
+.account-info-left li+li {
+    margin-bottom: 2px;
+}
+
+.account-info-right li+li {
+    margin-bottom: 10px;
+}
+
+.user-alias {
+    margin-bottom: 5px;
+}
+.user-id {
+    font-size: small;
+}
