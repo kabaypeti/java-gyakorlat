@@ -66,7 +66,6 @@ public class DbSeeder {
                 throw new RuntimeException("Hiba történt dátum formázásakor!!!");
             }
         });
-
     }
 
 }

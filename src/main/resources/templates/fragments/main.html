@@ -1,4 +1,4 @@
-<th:block th:fragment="page (page, title)">
+<th:block th:fragment="page (viewid, title)">
 <!DOCTYPE HTML>
 <!--
 	Editorial by HTML5 UP
@@ -12,11 +12,11 @@
 		</title>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-		<link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+		<link rel="stylesheet" th:href="@{/assets/css/main-extended.css}"/>
 	</head>
 	<body class="is-preload">
 		<div id="wrapper">
-			<th:block th:replace="~{${'/'+page} :: content}"></th:block>
+			<th:block th:replace="~{${'/'+viewid} :: content}"></th:block>
 			<th:block th:replace="~{/menu}"></th:block>
 		</div>
 		<th:block th:replace="~{/fragments/scripts}"></th:block>

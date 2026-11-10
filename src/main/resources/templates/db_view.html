@@ -1,26 +1,28 @@
-<th:block th:insert="~{/fragments/main :: page (page='db_view', title='Java Java Java')}"/>
+<th:block th:insert="~{/fragments/main :: page (viewid='db_view', title='Java Java Java')}"/>
 <th:block th:if="false">
   <th:block th:fragment="content">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back,arrow_forward"/>
     <div id="main">
       <div class="inner">
 
         <section>
           <div class="content">
             <th:block th:if="${data}">
-              <table>
-                <thead>
-                  <th:block th:each="c : ${columnNames}">
-                    <th th:text="${c}"></th>
-                  </th:block>
-                </thead>
-                <th:block th:each="d : ${data}">
-                  <tr>
-                    <th:block th:each="v : ${d}">
-                      <td th:text="${v}"></td>
+                <table>
+                  <thead>
+                    <th:block th:each="c : ${columnNames}">
+                      <th th:text="${c}"></th>
                     </th:block>
-                  </tr>
-                </th:block>
-              </table>
+                  </thead>
+                  <th:block th:each="d : ${data}">
+                    <tr>
+                      <th:block th:each="v : ${d}">
+                        <td th:text="${v}"></td>
+                      </th:block>
+                    </tr>
+                  </th:block>
+                </table>
+              <th:block th:replace="~{/fragments/pager}"/>
             </th:block>
           </div>
         </section>

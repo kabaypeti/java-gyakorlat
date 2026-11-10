@@ -9,6 +9,14 @@
     width: 100%;
 }
 
+.row .aln-right {
+    text-align: right;
+}
+
+.row .aln-center {
+    text-align: center;
+}
+
 input[type="submit"].primary-button,
 input[type="button"].primary-button {
     width: 100%;
@@ -47,4 +55,9 @@ a.link-button:hover {
 }
 .user-id {
     font-size: small;
+}
+
+table {
+    table-layout: fixed;
+    text-overflow: ellipsis;
 }
