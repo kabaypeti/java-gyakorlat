@@ -1,16 +1,31 @@
-<!DOCTYPE html>
-<html   xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<body>
-    <nav th:fragment="menu">
-        <a th:href="@{/}">Home</a>
-        <span sec:authorize="isAuthenticated()"> | <a th:href="@{/user}">User</a></span>
-        <span sec:authorize="hasRole('ADMIN')"> | <a th:href="@{/admin}">Admin</a></span>
-        <span sec:authorize="isAnonymous()"> | <a th:href="@{/register}">Register</a>  | <a th:href="@{/login}">Login</a></span>
-        <span sec:authorize="isAuthenticated()"> |
-            <form th:action="@{/logout}" method="post" style="display: inline">
-                <button type="submit">Logout</button>
-            </form>
-        </span>
-    </nav>
-</body>
-</html>
+<div id="sidebar">
+    <div class="inner">
+
+        <!-- Menu -->
+        <nav id="menu">
+            <header class="major">
+                <h2>Menü</h2>
+            </header>
+            <ul>
+                <li><a th:href="@{/}">Főoldal</a></li>
+                <li>
+                    <span class="opener">Fiók...</span>
+                    <ul>
+                        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Bejelentkezés</a></li>
+                        <li sec:authorize="isAnonymous()"><a th:href="@{/register}">Regisztráció</a></li>
+                        <li sec:authorize="isAuthenticated()">
+                            <a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Kijelentkezés</a>
+                            <form id="logout-form" th:action="@{/logout}" method="POST" style="display: none;"></form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright">Tót Benedek (NZL3EF) & Palotai Péter (CZLZYT).</p>
+        </footer>
+
+    </div>
+</div>

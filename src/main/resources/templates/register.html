@@ -1,18 +1,18 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Registration</title>
-</head>
-<body>
-    <div th:replace="~{menu :: menu}"></div>
-    <hr>
-    <h1>Registration</h1>
-    <p th:if="${error}" th:text="${error}" style="color: red"></p>
-    <form th:action="@{/register}" method="post">
-        <label>Username:</label><input type="text" name="username" required><br>
-        <label>Password:</label><input type="password" name="password" required><br>
-        <button type="submit">Register</button>
-    </form>
-</body>
-</html>
+<th:block th:insert="~{/fragments/main :: page (page='register', title='Java Java Java')}"/>
+<th:block th:if="false">
+    <th:block th:fragment="content">
+        <div id="main">
+            <div class="inner">
+                <hr>
+                <h2>Registration</h2>
+                <p th:if="${error}" th:text="${error}" style="color: red"></p>
+                <form th:action="@{/register}" method="post">
+                    <label>Username:</label><input type="text" name="username" required><br>
+                    <label>Password:</label><input type="password" name="password" required><br>
+                    <label>Password Confirmation:</label><input type="password" name="password_confirmation" required><br>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+    </th:block>
+</th:block>

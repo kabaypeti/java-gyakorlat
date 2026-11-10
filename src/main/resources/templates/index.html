@@ -1,0 +1,79 @@
+<th:block th:insert="~{/fragments/main :: page (page='index', title='Java Java Java')}"/>
+<th:block th:if="false"> <!-- /fragments/main jeleníti majd meg, itt átlépjük -->
+    <th:block th:fragment="content">
+        <div id="main">
+            <div class="inner">
+
+                <section id="banner">
+                    <div class="content">
+                        <header>
+                            <h1>Főoldal</h1>
+                            <p th:text="${headermsg == null ? 'Üdvözöllek az oldalon!' : headermsg}"/>
+                        </header>
+                        <p>Looooorem ipsuuuuuuum</p>
+                    </div>
+                    <span class="image object">
+                                <img th:src="@{images/deviza.jpg}" alt="" />
+                            </span>
+                </section>
+
+                <section>
+                    <header class="major">
+                        <h2>Aloldalak</h2>
+                    </header>
+                    <div class="features">
+                        <article>
+                            <span class="icon fa-gem"></span>
+                            <div class="content">
+                                <h3>Pizza 1</h3>
+                                <p>Pizza város pizza ház elkapott a pizzaláz</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span class="icon solid fa-user"></span>
+                            <div class="content">
+                                <h3>Pizza 2</h3>
+                                <p>Pizza város pizza ház elkapott a pizzaláz</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span class="icon solid fa-rocket"></span>
+                            <div class="content">
+                                <h3>Pizza 3</h3>
+                                <p>Pizza város pizza ház elkapott a pizzaláz</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span class="icon solid fa-tag"></span>
+                            <div class="content">
+                                <h3>Pizza 4</h3>
+                                <p>Pizza város pizza ház elkapott a pizzaláz</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span class="icon solid fa-coins"></span>
+                            <div class="content">
+                                <h3>Pizza 5</h3>
+                                <p>Pizza város pizza ház elkapott a pizzaláz</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span class="icon solid fa-wallet"></span>
+                            <div class="content">
+                                <h3>Pizza 6</h3>
+                                <p>Pizza város pizza ház elkapott a pizzaláz</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span class="icon solid fa-briefcase"></span>
+                            <div class="content">
+                                <h3>Pizza 7</h3>
+                                <p>Pizza város pizza ház elkapott a pizzaláz</p>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </th:block>
+</th:block>
