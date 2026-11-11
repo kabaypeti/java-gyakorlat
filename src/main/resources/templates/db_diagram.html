@@ -1,0 +1,81 @@
+<th:block th:insert="~{/fragments/main :: page (viewid='db_diagram', title='Adatbázis megtekintése')}"/>
+<th:block th:if="false">
+  <th:block th:fragment="content">
+    <div id="main">
+      <div class="inner">
+        <section>
+          <header class="major">
+            <h2>Diagram</h2>
+          </header>
+          <div class="content">
+            <div>
+              <canvas id="diagram"></canvas>
+            </div>
+            <form action="#" method="GET" id="sortmode-form">
+              <div class="row aln-center" style="margin-top: 10px">
+                <ul class="inline-list">
+                  <li>
+                    <label class="page-txt" for="sortMode">Rendezés:</label>
+                  </li>
+                  <li>
+                    <th:block th:if="${sortMode}">
+                    <select id="sortMode" name="sortMode" onchange="document.getElementById('sortmode-form').submit();">
+                      <th:block th:each="inst : ${sortModeNames}">
+                        <option th:value="${inst.key}" th:text="${inst.value}" th:selected="${sortMode == inst.key}">
+                        </option>
+                      </th:block>
+                    </select>
+                    </th:block>
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </th:block>
+</th:block>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script th:inline="javascript" type="text/javascript">
+  /*<![CDATA[*/
+  const ctx = document.getElementById('diagram');
+
+  var pizzanev = /*[[${pizzanevData}]]*/; //<%-JSON.stringify(data_pizzanev)%>;
+  var darab = /*[[${darabData}]]*/; //<%-JSON.stringify(data_darab)%>;
+
+  var min = Math.min(...darab) - 20;
+
+  const data = {
+    labels: pizzanev,
+    datasets: [{
+      label: 'Összesen rendelt darabszám',
+      data: darab,
+      hoverOffset: 0,
+      backgroundColor: 'rgba(235, 70, 38, 0.8)',
+      barThickness: 10,
+      hoverBackgroundColor: 'rgba(255, 165, 82, 1)'
+    }]
+  };
+  new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      scales: {
+        x: {
+          ticks: {
+            display: true,
+            autoSkip: false
+          }
+        },
+        y: {
+          min: min
+        },
+      }
+    }
+  });
+  /*]]>*/
+</script>

@@ -18,8 +18,8 @@ class LoadDatabase {
     CommandLineRunner initDatabase(KategoriaRepository kategoria, PizzaRepository pizza, RendelesRepository rendeles) {
         return args -> {
             var seeder = new DbSeeder(kategoria, pizza, rendeles);
-            seeder.drop();
-            seeder.seed();
+            //seeder.drop();
+            //seeder.seed();
         };
     }
 }

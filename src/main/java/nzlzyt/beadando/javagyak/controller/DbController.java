@@ -56,7 +56,7 @@ public class DbController {
         model.addAttribute("data", mappedData);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String getDbSelect() {
         return "db_select";
     }

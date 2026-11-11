@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity
+@Entity(name="pizza")
 @Table(name="pizza")
 public class Pizza {
 

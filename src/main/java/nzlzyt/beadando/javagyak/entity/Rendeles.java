@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 
-@Entity
+@Entity(name="rendeles")
 @Table(name="rendeles")
 public class Rendeles {
 
