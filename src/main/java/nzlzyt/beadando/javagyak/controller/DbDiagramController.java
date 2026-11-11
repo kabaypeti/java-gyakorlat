@@ -26,8 +26,6 @@ public class DbDiagramController {
     @GetMapping("/dbdiagram")
     public String getDbDiagram(Model model, @RequestParam(value = "sortMode", defaultValue = "NAME_FIRST") SortMode sortMode) {
 
-        //System.out.println(sortMode);
-
         var data = rendelesRepository.getCountGroupedByNev(sortMode.method);
         var pizzanevData = data.stream().map(CountByPizzaResults::getPizzanev);
         var darabData = data.stream().map(CountByPizzaResults::getDarab);
