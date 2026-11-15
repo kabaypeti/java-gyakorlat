@@ -17,9 +17,11 @@ class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(KategoriaRepository kategoria, PizzaRepository pizza, RendelesRepository rendeles) {
         return args -> {
-            var seeder = new DbSeeder(kategoria, pizza, rendeles);
-            //seeder.drop();
-            //seeder.seed();
+            if (kategoria.count() == 0 && pizza.count() == 0 && rendeles.count() == 0) {
+                var seeder = new DbSeeder(kategoria, pizza, rendeles);
+                //seeder.drop();
+                seeder.seed();
+            }
         };
     }
 }
