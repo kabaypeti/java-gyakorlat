@@ -1,0 +1,35 @@
+<th:block th:insert="~{/fragments/main :: page (viewid='crud_edit', title='Kategória szerkesztése')}"/>
+<th:block th:if="false">
+    <th:block th:fragment="content">
+        <div id="main">
+            <div class="inner">
+                <section>
+                    <header class="major">
+                        <h2>Kategória szerkesztése</h2>
+                    </header>
+                    <div class="content">
+                        <th:block th:replace="~{/fragments/error :: alert}"/>
+                        <form th:action="@{/crud/szerkesztes/{regiNev}(regiNev=${regiNev})}" method="post">
+                            <div class="row gtr-uniform">
+                                <div class="col-6 col-12-xsmall">
+                                    <label for="nev">Kategória neve</label>
+                                    <input type="text" name="nev" id="nev" th:value="${nev}" required />
+                                </div>
+                                <div class="col-6 col-12-xsmall">
+                                    <label for="ar">Ár</label>
+                                    <input type="number" name="ar" id="ar" th:value="${ar}" min="0"  required />
+                                </div>
+                                <div class="col-12">
+                                    <ul class="actions">
+                                        <li><button type="submit" class="button primary">Módosítás mentése</button></li>
+                                        <li><a th:href="@{/crud}" class="button">Mégse</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </th:block>
+</th:block>

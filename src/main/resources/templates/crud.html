@@ -27,7 +27,7 @@
                                     <td th:text="${kat.ar}" style="vertical-align: middle;"></td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <ul class="actions" style="margin-bottom: 0; justify-content: center;">
-                                            <li><a href="#" class="button">Szerkesztés</a></li>
+                                            <li><a th:href="@{/crud/szerkesztes/{nev}(nev=${kat.nev})}" class="button">Szerkesztés</a></li>
                                             <li><a href="#" class="button primary">Törlés</a></li>
                                         </ul>
                                     </td>

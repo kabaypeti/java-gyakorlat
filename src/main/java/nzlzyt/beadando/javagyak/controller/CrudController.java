@@ -5,10 +5,8 @@ import nzlzyt.beadando.javagyak.repository.KategoriaRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @Controller
@@ -51,6 +49,33 @@ public class CrudController {
         String error = validateKategoria(trimmedNev, ar, true);
         if (error != null) { return returnWithError("crud_create", error, trimmedNev, ar, model); }
         kategoriaRepository.save(new Kategoria(trimmedNev, ar));
+        return "redirect:/crud";
+    }
+
+    @GetMapping("/szerkesztes/{nev}")
+    public String showEditForm(@PathVariable("nev") String nev, Model model) {
+        var kategoriaOpt = kategoriaRepository.findById(nev);
+        if (kategoriaOpt.isEmpty()) { return "redirect:/crud"; }
+        Kategoria kat = kategoriaOpt.get();
+        model.addAttribute("regiNev", kat.getNev());
+        model.addAttribute("nev", kat.getNev());
+        model.addAttribute("ar", kat.getAr());
+        return "crud_edit";
+    }
+
+    @PostMapping("/szerkesztes/{regiNev}")
+    public String updateKategoria(@PathVariable("regiNev") String regiNev, @RequestParam("nev") String nev, @RequestParam("ar") Integer ar, Model model) {
+        String trimmedNev = (nev != null) ? nev.trim() : "";
+        String error = validateKategoria(trimmedNev, ar, !trimmedNev.equals(regiNev));
+
+        if (error != null) {
+            model.addAttribute("regiNev", regiNev);
+            return returnWithError("crud_edit", error, trimmedNev, ar, model);
+        }
+
+        if (!trimmedNev.equals(regiNev)) { kategoriaRepository.deleteById(regiNev); }
+        kategoriaRepository.save(new Kategoria(trimmedNev, ar));
+
         return "redirect:/crud";
     }
 
