@@ -9,6 +9,13 @@
             <ul>
                 <li><a th:href="@{/}">Főoldal</a></li>
                 <li><a th:href="@{/db}">Adatbázis</a></li>
+                <li>
+                    <span class="opener">Kapcsolat</span>
+                    <ul>
+                        <li><a th:href="@{/kapcsolat}">Üzenet küldése</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/uzenetek}">Üzenetek megtekintése</a></li>
+                    </ul>
+                </li>
                 <li><a th:href="@{/dbdiagram}">Adatbázis diagram</a></li>
                 <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/crud}">CRUD</a></li>
                 <li>

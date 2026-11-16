@@ -54,9 +54,9 @@ public class WebSecurityConfig {
         http
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/register", "/api/**", "/login", "/db/**", "/dbdiagram", "/assets/**", "/images/**", "/static/**").permitAll()
+                        .requestMatchers("/", "/register", "/api/**", "/login", "/db/**", "/kapcsolat", "/dbdiagram", "/assets/**", "/images/**", "/static/**").permitAll()
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/user", "/uzenetek").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/admin", "/crud/**").hasRole("ADMIN")
                         .anyRequest()
                         .authenticated()

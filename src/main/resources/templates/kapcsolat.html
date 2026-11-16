@@ -1,0 +1,33 @@
+<th:block th:insert="~{/fragments/main :: page (viewid='kapcsolat', title='Kapcsolat')}"/>
+<th:block th:if="false">
+    <th:block th:fragment="content">
+        <div id="main">
+            <div class="inner">
+                <section>
+                    <header class="major">
+                        <h2>Üzenet küldése</h2>
+                    </header>
+                    <div class="content">
+                        <th:block th:replace="~{/fragments/error :: alert}"/>
+                        <div th:if="${success}" style="background-color: #d4edda; color: #155724; padding: 1em; border-radius: 5px; margin-bottom: 1.5em; border: 1px solid #c3e6cb;">
+                            <strong th:text="${success}"></strong>
+                        </div>
+                        <form th:action="@{/kapcsolat}" method="post">
+                            <div class="row gtr-uniform">
+                                <div class="col-12">
+                                    <label for="uzenet">Üzenet</label>
+                                    <textarea name="uzenet" id="uzenet" rows="5" th:text="${uzenet}" placeholder="Írd ide az üzenetedet..." required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <ul class="actions">
+                                        <li><button type="submit" class="button primary">Üzenet elküldése</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </th:block>
+</th:block>
