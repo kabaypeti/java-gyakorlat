@@ -10,7 +10,7 @@
                 <li><a th:href="@{/}">Főoldal</a></li>
                 <li><a th:href="@{/db}">Adatbázis</a></li>
                 <li><a th:href="@{/dbdiagram}">Adatbázis diagram</a></li>
-                <li><a th:href="@{/crud}">CRUD</a></li>
+                <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/crud}">CRUD</a></li>
                 <li>
                     <span class="opener">Fiók...</span>
                     <ul>

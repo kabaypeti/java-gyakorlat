@@ -79,6 +79,18 @@ public class CrudController {
         return "redirect:/crud";
     }
 
+    @GetMapping("/torles/{nev}")
+    public String deleteKategoria(@PathVariable("nev") String nev) {
+        try {
+            if (kategoriaRepository.existsById(nev)) {
+                kategoriaRepository.deleteById(nev);
+            }
+        } catch (Exception e) {
+
+        }
+        return "redirect:/crud";
+    }
+
     //szerveroldali hibakezelés
 
     private String validateKategoria(String nev, Integer ar, boolean checkDuplicate) {

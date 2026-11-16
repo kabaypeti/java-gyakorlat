@@ -28,7 +28,9 @@
                                     <td style="text-align: center; vertical-align: middle;">
                                         <ul class="actions" style="margin-bottom: 0; justify-content: center;">
                                             <li><a th:href="@{/crud/szerkesztes/{nev}(nev=${kat.nev})}" class="button">Szerkesztés</a></li>
-                                            <li><a href="#" class="button primary">Törlés</a></li>
+                                            <li>
+                                                <a th:href="@{/crud/torles/{nev}(nev=${kat.nev})}" class="button primary" onclick="return confirm('Biztosan törölni szeretnéd ezt a kategóriát?');">Törlés</a>
+                                            </li>
                                         </ul>
                                     </td>
                                 </tr>
