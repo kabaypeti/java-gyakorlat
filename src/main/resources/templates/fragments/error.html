@@ -1,0 +1,5 @@
+<th:block th:fragment="alert">
+    <div th:if="${error}" style="background-color: #f8d7da; color: #721c24; padding: 1em; border-radius: 5px; margin-bottom: 1.5em; border: 1px solid #f5c6cb;">
+        <strong th:text="${error}"></strong>
+    </div>
+</th:block>
