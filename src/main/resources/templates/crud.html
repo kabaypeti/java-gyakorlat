@@ -1,0 +1,44 @@
+<th:block th:insert="~{/fragments/main :: page (viewid='crud', title='CRUD')}"/>
+<th:block th:if="false">
+    <th:block th:fragment="content">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back,arrow_forward"/>
+        <div id="main">
+            <div class="inner">
+                <section>
+                    <header class="major">
+                        <h2>Kategória CRUD</h2>
+                    </header>
+                    <div class="content">
+                        <ul class="actions">
+                            <li><a href="#" class="button primary large">Új kategória</a></li>
+                        </ul>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th style="width: 25%;">Név</th>
+                                    <th style="width: 20%;">Ár</th>
+                                    <th style="width: 55%; text-align: center;">Műveletek</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="kat : ${kategoriak}">
+                                    <td th:text="${kat.nev}" style="vertical-align: middle;"></td>
+                                    <td th:text="${kat.ar}" style="vertical-align: middle;"></td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <ul class="actions" style="margin-bottom: 0; justify-content: center;">
+                                            <li><a href="#" class="button">Szerkesztés</a></li>
+                                            <li><a href="#" class="button primary">Törlés</a></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <th:block th:replace="~{/fragments/pager}"/>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </th:block>
+</th:block>
