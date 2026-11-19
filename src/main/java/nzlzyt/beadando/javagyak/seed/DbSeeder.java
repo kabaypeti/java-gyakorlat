@@ -11,6 +11,7 @@ import nzlzyt.beadando.javagyak.util.DbUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.sql.Date;
 import java.text.ParseException;
@@ -34,18 +35,18 @@ public class DbSeeder {
         kategoriaRepository.deleteAll();
     }
 
-    public void seed() throws FileNotFoundException {
+    public void seed() throws IOException {
 
-        var root = "./src/main/resources/seed/txt/";
+        var root = "/seed/txt/";
         var f = new File(root+"kategoria.txt");
-        DbUtil.seedTableFromFile(new File(root+"kategoria.txt"), kategoriaRepository, map -> {
+        DbUtil.seedTableFromFile(root+"kategoria.txt", kategoriaRepository, map -> {
             return new Kategoria(
                     map.get("nev"),
                     Integer.parseInt(map.get("ar"))
             );
         });
 
-        DbUtil.seedTableFromFile(new File(root+"pizza.txt"), pizzaRepository, map -> {
+        DbUtil.seedTableFromFile(root+"pizza.txt", pizzaRepository, map -> {
             return new Pizza(
                     map.get("nev"),
                     kategoriaRepository.getReferenceById(map.get("kategorianev")),
@@ -53,7 +54,7 @@ public class DbSeeder {
             );
         });
 
-        DbUtil.seedTableFromFile(new File(root+"rendeles.txt"), rendelesRepository, map -> {
+        DbUtil.seedTableFromFile(root+"rendeles.txt", rendelesRepository, map -> {
             SimpleDateFormat parser = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
             try {
                 return new Rendeles(

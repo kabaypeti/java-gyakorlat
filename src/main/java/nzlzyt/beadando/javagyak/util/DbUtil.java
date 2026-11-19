@@ -5,6 +5,8 @@ import org.springframework.data.repository.Repository;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import java.util.function.Function;
 
@@ -18,28 +20,30 @@ public class DbUtil {
         return mapList;
     }
 
-    public static <D,R extends JpaRepository<D, ?>> void seedTableFromFile(File file, R repository, Function<Map<String,String>, D> factory) throws FileNotFoundException {
-        seedTableFromFile(file, repository, factory, repository.count() == 0);
+    public static <D,R extends JpaRepository<D, ?>> void seedTableFromFile(String path, R repository, Function<Map<String,String>, D> factory) throws IOException {
+        seedTableFromFile(path, repository, factory, repository.count() == 0);
     }
 
-    public static <D,R extends JpaRepository<D, ?>> void seedTableFromFile(File file, R repository, Function<Map<String,String>, D> factory, boolean force) throws FileNotFoundException {
+    public static <D,R extends JpaRepository<D, ?>> void seedTableFromFile(String path, R repository, Function<Map<String,String>, D> factory, boolean force) throws IOException {
         if (force) {
-            Scanner sc = new Scanner(file);
-            String keyLine = sc.nextLine().trim();
-            var keys = keyLine.split("\t");
+            try (InputStream inputStream = DbUtil.class.getResourceAsStream(path)) {
+                Scanner sc = new Scanner(inputStream);
+                String keyLine = sc.nextLine().trim();
+                var keys = keyLine.split("\t");
 
-            List<D> entries = new ArrayList<>();
-            while (sc.hasNext()) {
-                String line = sc.nextLine().trim();
-                var data = line.split("\t");
-                HashMap<String, String> mapped = new HashMap<>();
-                for (int i = 0; i < keys.length; ++i) {
-                    mapped.put(keys[i], data[i]);
+                List<D> entries = new ArrayList<>();
+                while (sc.hasNext()) {
+                    String line = sc.nextLine().trim();
+                    var data = line.split("\t");
+                    HashMap<String, String> mapped = new HashMap<>();
+                    for (int i = 0; i < keys.length; ++i) {
+                        mapped.put(keys[i], data[i]);
+                    }
+
+                    entries.add(factory.apply(mapped));
                 }
-
-                entries.add(factory.apply(mapped));
+                repository.saveAll(entries);
             }
-            repository.saveAll(entries);
         }
     }
 
