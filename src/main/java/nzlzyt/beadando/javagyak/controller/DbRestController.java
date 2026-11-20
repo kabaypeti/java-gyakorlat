@@ -1,5 +1,6 @@
 package nzlzyt.beadando.javagyak.controller;
 
+import nzlzyt.beadando.javagyak.dto.RendelesRequest;
 import nzlzyt.beadando.javagyak.entity.Pizza;
 import nzlzyt.beadando.javagyak.entity.Rendeles;
 import nzlzyt.beadando.javagyak.repository.KategoriaRepository;
@@ -7,6 +8,9 @@ import nzlzyt.beadando.javagyak.repository.PizzaRepository;
 import nzlzyt.beadando.javagyak.repository.RendelesRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,11 +19,14 @@ import java.util.Optional;
 public class DbRestController {
 
     private final RendelesRepository rendelesRepository;
+    private final PizzaRepository pizzaRepository;
 
     public DbRestController(
-            RendelesRepository rendeles
+            RendelesRepository rendeles,
+            PizzaRepository pizza
     ) {
         rendelesRepository = rendeles;
+        pizzaRepository = pizza;
     }
 
     @GetMapping("/rendeles")
@@ -28,8 +35,19 @@ public class DbRestController {
     }
 
     @PostMapping("/rendeles")
-    public Rendeles apiCreateRendeles(@RequestBody Rendeles rendeles) {
-        return rendelesRepository.save(rendeles);
+    public Rendeles apiCreateRendeles(@RequestBody RendelesRequest rendeles) throws ParseException {
+        var pizza = pizzaRepository.findById(rendeles.getPizzanev());
+        if (pizza.isPresent()) {
+            return rendelesRepository.save(
+                new Rendeles(
+                    pizza.get(),
+                    rendeles.getDarab(),
+                    DateFormat.getInstance().parse(rendeles.getFelvetel()),
+                    DateFormat.getInstance().parse(rendeles.getKiszallitas())
+                )
+            );
+        }
+        return null;
     }
 
     @GetMapping("/rendeles/{id}")
