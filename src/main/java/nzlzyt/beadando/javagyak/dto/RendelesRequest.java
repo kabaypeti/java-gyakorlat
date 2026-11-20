@@ -1,10 +1,5 @@
 package nzlzyt.beadando.javagyak.dto;
 
-import jakarta.persistence.*;
-import nzlzyt.beadando.javagyak.entity.Pizza;
-
-import java.util.Date;
-
 public class RendelesRequest {
     private String pizzanev;
     private Integer darab;
