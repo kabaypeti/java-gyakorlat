@@ -37,14 +37,15 @@ public class WebSecurityConfig {
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
         return (request, response, authentication) -> {
+            var context = request.getContextPath();
             boolean isAdmin = authentication
                     .getAuthorities()
                     .stream()
                     .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
             if (isAdmin) {
-                response.sendRedirect("/admin");
+                response.sendRedirect(context+"/admin");
             } else {
-                response.sendRedirect("/user");
+                response.sendRedirect(context+"/user");
             }
         };
     }
