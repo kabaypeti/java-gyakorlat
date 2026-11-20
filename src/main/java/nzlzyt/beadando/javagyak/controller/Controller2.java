@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Objects;
+
 @Controller
 public class Controller2 {
     private final UserRepository userRepository;
@@ -25,9 +27,13 @@ public class Controller2 {
         return "register";
     }
     @PostMapping("/register")
-    public String register(@RequestParam String username, @RequestParam String password, Model model) {
+    public String register(@RequestParam String username, @RequestParam String password, @RequestParam(name="password_confirmation") String passwordConfirmation, Model model) {
         if (userRepository.findByUsername(username).isPresent()) {
             model.addAttribute("error","This username is already taken!");
+            return "register";
+        }
+        if (!password.equals(passwordConfirmation)) {
+            model.addAttribute("error","The password field confirmation does not match!");
             return "register";
         }
         User user = new User();
